@@ -8,13 +8,22 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../angular-client/')));
 
 app.get('/cats', function (req, res) {
-  // TODO - your code here!
-  
+    db.Cat.find({},function(error,data){
+  	if(error){
+      console.log("error in find")
+     	res.status(404).send("error in get");
+  	}
+  	else{
+     	res.status(200).send(data)
+  	}
+  })
 
 });
 
 app.post('/cats', function (req, res) {
-  // TODO - your code here!
+  db.save(req.body,function(data){
+  	res.status(200).send();	
+  })
   
 })
 
