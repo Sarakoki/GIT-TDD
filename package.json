@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start",
-    "start": "nodemon server/index.js"
+    "test": "karma test",
+    "start": "nodemon server/index.js",
+    "test-server":"mocha test/serverSpec.js"
   },
   "author": "RBK",
   "license": "ISC",
