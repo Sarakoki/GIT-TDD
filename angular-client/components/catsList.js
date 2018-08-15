@@ -4,16 +4,28 @@ app.component('cats', {
 	templateUrl: '/templates/adoptCat.html'
 });
 app.controller('catsCtrl', function ($scope, $http,$window){
-var getCats = function() {
-	// TODO: Your code here
+	var getCats = function() {
+		$http.get("/cats")
+		.then(function successCallback(response) {
+			$scope.cats = response.data;
+    }, function errorCallback(response) {
+        $scope.error = response.statusText;
+    });
 
-};
-getCats();
+	};
+	getCats();
 
-$scope.addCats=function() {
-// TODO: Your code here
+	$scope.addCats=function() {
+		$http.post("/cats",{catName:$scope.catName,ownerEmail:$scope.ownerEmail,imageUrl:$scope.imageUrl,adoptionMessage:$scope.adoptionMessage} 
+			).then(function successCallback(response) {
+				console.log('success');
+           }, function errorCallback(response) {
+        $scope.error = response.statusText;
+    });
 
 
-}
+		}
+	})	
 
-});
+export default app;	
+
